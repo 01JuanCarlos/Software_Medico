@@ -1,25 +1,18 @@
-package com.orcronics.Software_Medico.security.entity;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.persistence.*;
+package com.orcronics.Software_Medico.security.dto;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+public class UsuarioDTO {
 
-@Entity
-@Table(name = "user")
-public class Usuario {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
     @NotBlank
     @Size(max = 50)
-  //  @Column(unique = true)
-    private String userName; //es el correo usado para autenticación.
+    private String userName; // Es el correo usado para autenticación.
+
     @NotBlank
     @Size(min = 4, max = 255)
     private String password;
@@ -29,69 +22,45 @@ public class Usuario {
     @NotBlank
     @Size(min = 3, max = 50)
     private String nombres;
+
     @NotBlank
     @Size(min = 3, max = 30)
     private String apellidoPaterno;
+
     @Size(max = 30)
     private String apellidoMaterno;
+
     @NotBlank
     @Size(min = 8, max = 8)
     private String dni;
+
     @Size(max = 30)
     private String celular;
+
     @Size(max = 255)
     private String direccion;
+
     @Size(max = 255)
     private String notas;
 
     @NotNull
     private int usuarioReg;
+
     @NotNull
     private Date fechaReg;
+
     private int usuarioAct;
     private Date fechaAct;
 
-    @NotNull
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "user_rol", joinColumns = @JoinColumn(name = "usuario_id"),
-            inverseJoinColumns = @JoinColumn(name = "rol_id"))
-    private Set<Rol> roles = new HashSet<>();
+    private Set<String> roles = new HashSet<>(); // Nombres de roles (en lugar de IDs)
+
+    private List<Integer> locales; // IDs de locales
+
+    // Getters y setters
 
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
-    @JoinTable(name = "user_local",
-            joinColumns = @JoinColumn(name = "user_id"), // id de entidad Usuario.
-            inverseJoinColumns = @JoinColumn(name = "local_id")) // id de entidad Local.
-    @JsonProperty(value = "locales")
-    private Set<Local> locales;
+    public UsuarioDTO() {
 
-
-    public Usuario() {
-    }
-
-    public Usuario(String userName, String password, boolean activo, String nombres, String apellidoPaterno, String apellidoMaterno, String dni, String celular, String direccion, String notas, int usuarioReg, Date fechaReg, int usuarioAct, Date fechaAct) {
-        this.userName = userName;
-        this.password = password;
-        this.activo = activo;
-        this.nombres = nombres;
-        this.apellidoPaterno = apellidoPaterno;
-        this.apellidoMaterno = apellidoMaterno;
-        this.dni = dni;
-        this.celular = celular;
-        this.direccion = direccion;
-        this.notas = notas;
-        this.usuarioReg = usuarioReg;
-        this.fechaReg = fechaReg;
-        this.usuarioAct = usuarioAct;
-        this.fechaAct = fechaAct;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public @NotBlank @Size(max = 50) String getUserName() {
@@ -207,19 +176,19 @@ public class Usuario {
         this.fechaAct = fechaAct;
     }
 
-    public @NotNull Set<Rol> getRoles() {
+    public Set<String> getRoles() {
         return roles;
     }
 
-    public void setRoles(@NotNull Set<Rol> roles) {
+    public void setRoles(Set<String> roles) {
         this.roles = roles;
     }
 
-    public Set<Local> getLocales() {
+    public List<Integer> getLocales() {
         return locales;
     }
 
-    public void setLocales(Set<Local> locales) {
+    public void setLocales(List<Integer> locales) {
         this.locales = locales;
     }
 }

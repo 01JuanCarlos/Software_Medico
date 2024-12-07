@@ -3,6 +3,8 @@ package com.orcronics.Software_Medico.security.entity;
 
 import jakarta.persistence.*;
 
+import java.util.Set;
+
 @Entity
 @Table(name = "Local")
 public class Local {
@@ -13,7 +15,12 @@ public class Local {
     private String nombre;
     private String direccion;
     private String ciudad;
-   private String username;
+    private String username;
+
+    // Relación bidireccional con Usuario (ManyToMany)
+    @ManyToMany(mappedBy = "locales")
+    private Set<Usuario> usuarios;
+
 
     public Local() {
     }

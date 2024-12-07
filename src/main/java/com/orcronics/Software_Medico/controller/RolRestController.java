@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
-@CrossOrigin(value = "http://52.35.202.0:8080")
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(value = "/api/app")
 public class RolRestController {

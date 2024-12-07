@@ -7,7 +7,6 @@ import java.util.List;
 
 public interface LocalRepository extends JpaRepository<Local, Integer> {
     List<Local> findAllByOrderByIdAsc();
-
-
+ //   void deleteByUserId(Integer userId);
 
 }
