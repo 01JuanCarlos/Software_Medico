@@ -75,4 +75,11 @@ public class UsuarioController {
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
+    @GetMapping("/buscarporNombre/{username}")
+    public ResponseEntity<Usuario> obtenerUsuarioPorUserName(@PathVariable String username) {
+        Optional<Usuario> usuario = usuarioService.getByNombreUsuario(username);
+        return usuario.map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+    }
+
 }

@@ -36,10 +36,6 @@ public class UsuarioService {
     @Autowired
     RolRepository rolRepository;
 
-    @Autowired
-    @Lazy
-    private PasswordEncoder passwordEncoder;
-
     public Optional<Usuario> getByNombreUsuario(String nombreUsuario) {
         return usuarioRepository.findByUserName(nombreUsuario);
     }

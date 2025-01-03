@@ -40,7 +40,8 @@ public class ProductoRestController {
 	}
 	
 	
-	@GetMapping(value = "/productos/activos")
+	//@GetMapping(value = "/productos/activos")
+	@GetMapping(value = "/procedimientos/activos")
 	public ResponseEntity<List<Procedimiento>> obtenerTodosActivos() {
 		try {
 			List<Procedimiento> list = productoService.buscarPorActivo(true);
@@ -53,7 +54,8 @@ public class ProductoRestController {
 		}
 	}
 	
-	@GetMapping(value = "/productos/activos_por_local/{localid}")
+	//@GetMapping(value = "/productos/activos_por_local/{localid}")
+	@GetMapping(value = "/procedimientos/activos_por_local/{localid}")
 	public ResponseEntity<List<Procedimiento>> obtenerTodosActivosPorLoca(@PathVariable int localid) {
 		try {
 			List<Procedimiento> list = productoService.buscarPorActivoYLocal(true, localid);
